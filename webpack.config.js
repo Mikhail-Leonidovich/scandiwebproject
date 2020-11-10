@@ -12,11 +12,9 @@ module.exports = {
   },
 
   devServer: {
-    open: true,
     contentBase: path.join(__dirname, "dist"),
     compress: true,
     port: 9000,
-    hot: true,
   },
 
   plugins: [
@@ -28,7 +26,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
