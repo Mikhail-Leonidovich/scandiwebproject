@@ -12,13 +12,14 @@
   justify-content: flex-start;
   flex-wrap: nowrap;
   height: 100%;
-  width: 300%;
+  width: 400%;
 }
 
 .slider__elem {
   flex-basis: 100%;
   flex-shrink: 0;
   flex: 1;
+  justify-content: center;
 }
 
 .slider__img {
@@ -45,12 +46,12 @@
   color: #de3333;
 }
 
-.left {
+.previos {
   left: 0px;
   z-index: 20;
 }
 
-.right {
+.next {
   right: 0px;
   z-index: 20;
 }
@@ -61,7 +62,7 @@
   transition: 0.3s;
 }
 
-.previos {
+.left {
   display: inline-block;
   width: 45px;
   height: 45px;
@@ -70,7 +71,7 @@
   transform: rotate(-130deg);
 }
 
-.next {
+.right {
   display: inline-block;
   width: 45px;
   height: 45px;
@@ -79,7 +80,7 @@
   transform: rotate(45deg);
 }
 
-.arrow.left:hover .previos {
+.arrow.previos:hover .left {
   height: 60px;
   width: 60px;
   border-top: 10px solid #de3333;
@@ -88,7 +89,7 @@
   opacity: 1;
 }
 
-.arrow.right:hover .next {
+.arrow.next:hover .right {
   height: 60px;
   width: 60px;
   border-top: 10px solid #de3333;
