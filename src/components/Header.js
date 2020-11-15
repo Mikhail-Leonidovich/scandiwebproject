@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../styles/Header.css";
-import scandiwebLogo from "../images/scandiweb_logo.png";
+
+import scandiwebLogo from "../../dist/images/scandiweb_logo.png";
 
 class Header extends Component {
   render() {

@@ -5,6 +5,13 @@
   overflow: hidden;
   position: relative;
   z-index: 10;
+  opacity: 0.8;
+  transition: 0.3s;
+}
+
+.header:hover {
+  transition: 0.3s;
+  opacity: 1;
 }
 
 .header__nav {
