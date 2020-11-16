@@ -14,6 +14,10 @@
   opacity: 1;
 }
 
+.burger-menu {
+  display: none;
+}
+
 .header__nav {
   display: flex;
   justify-content: space-between;
@@ -56,4 +60,99 @@
 
 .nav__item:last-child {
   margin-right: 0px;
+}
+
+/* ==================
+        Media
+===================*/
+
+@media screen and (max-width: 1189px) {
+  .nav__link {
+    font-size: 15px;
+  }
+
+  .header {
+    max-height: 50px;
+  }
+
+  .header__nav {
+    max-height: 50px;
+  }
+
+  .scandiweb-logo {
+    max-height: 40px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    height: 40px;
+  }
+
+  .header__nav {
+    max-height: 40px;
+  }
+
+  .nav__list {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 100%;
+    flex-direction: column;
+    background: #de3333;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .show {
+    display: flex;
+  }
+
+  .nav__item {
+    margin: 20px 0;
+  }
+
+  .nav__item:hover {
+    text-decoration: underline;
+  }
+
+  .nav__link {
+    color: #fff;
+  }
+
+  .scandiweb-logo {
+    max-height: 30px;
+  }
+
+  .burger-menu {
+    display: inline-block;
+    height: 20px;
+    width: 30px;
+    position: fixed;
+    top: 10px;
+    right: 18px;
+  }
+
+  .burger-line__top,
+  .burger-line__middle,
+  .burger-line__bottom {
+    position: absolute;
+    height: 4px;
+    width: 100%;
+    background-color: #de3333;
+  }
+
+  .burger-line__top {
+    top: 0px;
+  }
+
+  .burger-line__middle {
+    top: 8px;
+  }
+
+  .burger-line__bottom {
+    bottom: 0px;
+  }
 }

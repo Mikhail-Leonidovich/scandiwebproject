@@ -1,24 +1,24 @@
 [
   {
-    "url": "../images/imageForest.jpg",
+    "url": "http://wallpapers-image.ru/1600x900/forest/wallpapers/wallpapers-forest-31.jpg",
     "imageStyle": "slider__img",
     "blockStyle": "slider__elem",
     "alt": "forest"
   },
   {
-    "url": "../images/imageOcean.jpg",
+    "url": "https://look.com.ua/pic/201210/1600x900/look.com.ua-52268.jpg",
     "imageStyle": "slider__img",
     "blockStyle": "slider__elem",
     "alt": "ocean"
   },
   {
-    "url": "../images/imageShips.jpg",
+    "url": "https://images.wallpaperscraft.ru/image/korabli_port_more_76973_1600x900.jpg",
     "imageStyle": "slider__img",
     "blockStyle": "slider__elem",
     "alt": "ships"
   },
   {
-    "url": "../images/imageTiger.jpg",
+    "url": "https://i.pinimg.com/originals/df/a0/13/dfa013f216cbfd0eb8e9bb685655de7f.jpg",
     "imageStyle": "slider__img",
     "blockStyle": "slider__elem",
     "alt": "tiger"

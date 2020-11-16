@@ -44,7 +44,7 @@ class Carousel extends Component {
           {this.state.arrayOfImages
             .map((elem, index) => {
               return (elem = (
-                <div key={index} className={elem.blocStyle}>
+                <div key={index} className={elem.blockStyle}>
                   <img
                     className={elem.imageStyle}
                     src={elem.url}
