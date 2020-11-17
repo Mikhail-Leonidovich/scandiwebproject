@@ -9,7 +9,7 @@ class Header extends Component {
 
     this.state = {
       visible: false,
-      burgerMenuCloseBtn: false,
+      backgroundColor: "fffff",
     };
   }
 
@@ -25,10 +25,15 @@ class Header extends Component {
     return (
       <div className="header">
         <div className="container">
-          <div className="burger-menu" onClick={this.handleChangeBurgerStyle}>
-            <span className="burger-line__top"></span>
-            <span className="burger-line__middle"></span>
-            <span className="burger-line__bottom"></span>
+          <div
+            className={
+              this.state.visible ? "burger-menu active" : "burger-menu"
+            }
+            onClick={this.handleChangeBurgerStyle}
+          >
+            <span className="burger-line top"></span>
+            <span className="burger-line middle"></span>
+            <span className="burger-line bottom"></span>
           </div>
           <nav className="header__nav">
             <a className="header__logo" href="#">
