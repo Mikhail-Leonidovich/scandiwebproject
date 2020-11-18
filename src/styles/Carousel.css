@@ -91,3 +91,13 @@
   transition: 0.3s;
   opacity: 1;
 }
+
+/* ==================    
+      adaptive
+===================*/
+
+@media screen and (max-width: 768px) {
+  .arrow {
+    display: none;
+  }
+}
