@@ -1,26 +1,26 @@
 [
   {
     "url": "/images/imageForest.jpg",
-    "imageStyle": "slider__img",
-    "blockStyle": "slider__elem",
+    "imageClass": "slider__img",
+    "blockClass": "slider__elem",
     "alt": "forest"
   },
   {
     "url": "/images/imageOcean.jpg",
-    "imageStyle": "slider__img",
-    "blockStyle": "slider__elem",
+    "imageClass": "slider__img",
+    "blockClass": "slider__elem",
     "alt": "ocean"
   },
   {
     "url": "/images/imageShips.jpg",
-    "imageStyle": "slider__img",
-    "blockStyle": "slider__elem",
+    "imageClass": "slider__img",
+    "blockClass": "slider__elem",
     "alt": "ships"
   },
   {
     "url": "/images/imageTiger.jpg",
-    "imageStyle": "slider__img",
-    "blockStyle": "slider__elem",
+    "imageClass": "slider__img",
+    "blockClass": "slider__elem",
     "alt": "tiger"
   }
 ]

@@ -82,6 +82,36 @@
   .scandiweb-logo {
     max-height: 40px;
   }
+
+  /* arrows */
+
+  .left {
+    width: 40px;
+    height: 40px;
+    border-top: 6px solid #de3333;
+    border-right: 6px solid #de3333;
+  }
+
+  .right {
+    width: 40px;
+    height: 40px;
+    border-top: 6px solid #de3333;
+    border-right: 6px solid #de3333;
+  }
+
+  .arrow.previos:hover .left {
+    height: 50px;
+    width: 50px;
+    border-top: 8px solid #de3333;
+    border-right: 8px solid #de3333;
+  }
+
+  .arrow.next:hover .right {
+    height: 50px;
+    width: 50px;
+    border-top: 8px solid #de3333;
+    border-right: 8px solid #de3333;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -94,9 +124,8 @@
   }
 
   .nav__list {
-    display: none;
     position: fixed;
-    top: 0;
+    top: -100%;
     right: 0;
     height: 100vh;
     width: 100%;
@@ -104,16 +133,15 @@
     background-color: #fff;
     align-items: center;
     justify-content: center;
-    animation: 1s navListSurfacing;
   }
 
   .show {
-    display: flex;
+    top: 0;
   }
 
   .nav__item {
     margin: 30px 0;
-    animation: 2s navItemkSurfacing;
+    animation: 2s navItemSurfacing;
   }
 
   .nav__item:hover {
@@ -160,28 +188,104 @@
   .burger-line.bottom {
     bottom: 0px;
   }
+
+  /* arrows */
+
+  .left {
+    width: 30px;
+    height: 30px;
+    border-top: 4px solid #de3333;
+    border-right: 4px solid #de3333;
+  }
+
+  .right {
+    width: 30px;
+    height: 30px;
+    border-top: 4px solid #de3333;
+    border-right: 4px solid #de3333;
+  }
+
+  .arrow.previos:hover .left {
+    height: 40px;
+    width: 40px;
+    border-top: 6px solid #de3333;
+    border-right: 6px solid #de3333;
+  }
+
+  .arrow.next:hover .right {
+    height: 40px;
+    width: 40px;
+    border-top: 6px solid #de3333;
+    border-right: 6px solid #de3333;
+  }
 }
 
 /* ==================
       animation
 ===================*/
 
+.navListSurfacing {
+  animation: 1s navListSurfacing;
+}
+
+.navListSurfacingBack {
+  animation: 1s navListSurfacingBack;
+}
+
 @keyframes navListSurfacing {
   from {
     height: 10vh;
     width: 10%;
+    opacity: 0;
+    top: -100%;
   }
   to {
     height: 100vh;
     width: 100%;
+    opacity: 1;
+    top: 0;
+  }
+  30% {
+    border-bottom-left-radius: 100% 70%;
+  }
+
+  100% {
+    border-bottom-left-radius: none;
   }
 }
 
-@keyframes navItemkSurfacing {
+@keyframes navListSurfacingBack {
+  from {
+    height: 100vh;
+    width: 100%;
+    opacity: 1;
+    top: 0;
+  }
+  to {
+    height: 10vh;
+    width: 10%;
+    opacity: 0;
+    top: -100%;
+  }
+
+  0% {
+    border-bottom-left-radius: none;
+  }
+
+  20% {
+    border-bottom-left-radius: 70% 60%;
+  }
+
+  100% {
+    border-bottom-left-radius: 100% 60%;
+  }
+}
+
+@keyframes navItemSurfacing {
   from {
     opacity: 0;
   }
-  50% {
+  to {
     opacity: 1;
   }
 }

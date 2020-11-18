@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import allImages from "../components/AllImages.json";
-
+import CarouselElement from "../components/CarouselElement.js";
 import "../styles/Carousel.css";
 
 class Carousel extends Component {
@@ -21,7 +21,7 @@ class Carousel extends Component {
       } else {
         currentSlide = state.arrayOfImages.length - 1;
       }
-      return { currentSlide: currentSlide };
+      return { currentSlide };
     });
   };
 
@@ -33,30 +33,15 @@ class Carousel extends Component {
       } else {
         currentSlide = currentSlide + 1;
       }
-      return { currentSlide: currentSlide };
+      return { currentSlide };
     });
   };
 
   render() {
+    const slideIndex = this.state.arrayOfImages[this.state.currentSlide];
     return (
       <div className="carousel">
-        <div className="slider">
-          {this.state.arrayOfImages
-            .map((elem, index) => {
-              return (elem = (
-                <div key={index} className={elem.blockStyle}>
-                  <img
-                    className={elem.imageStyle}
-                    src={elem.url}
-                    alt={elem.alt}
-                  ></img>
-                </div>
-              ));
-            })
-            .find((elem, index) => {
-              return index === this.state.currentSlide;
-            })}
-        </div>
+        <div className="slider">{<CarouselElement {...slideIndex} />}</div>
 
         <div className="controls">
           <button className="arrow previos" onClick={this.handleChangeLeft}>

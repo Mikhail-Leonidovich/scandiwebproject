@@ -44,7 +44,13 @@ class Header extends Component {
               ></img>
             </a>
 
-            <ul className={this.state.visible ? "nav__list show" : "nav__list"}>
+            <ul
+              className={
+                this.state.visible
+                  ? "nav__list show navListSurfacing"
+                  : "nav__list navListSurfacingBack"
+              }
+            >
               <li className="nav__item">
                 <a className="nav__link" href="#">
                   about
