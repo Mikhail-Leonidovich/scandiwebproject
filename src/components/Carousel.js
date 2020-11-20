@@ -8,6 +8,10 @@ class Carousel extends Component {
     super(props);
 
     this.state = {
+      pointDifference: null,
+      startPoint: null,
+      endPoint: null,
+      move: false,
       arrayOfImages: allImages,
       currentSlide: 0,
     };
@@ -37,11 +41,54 @@ class Carousel extends Component {
     });
   };
 
+  handleMouseDown = (e) => {
+    this.setState((state) => {
+      let { startPoint, move } = state;
+      startPoint = e.nativeEvent.clientX;
+      move = !move;
+      return { startPoint, move };
+    });
+  };
+
+  handleMouseMove = (e) => {
+    if (this.state.move) {
+      this.setState((state) => {
+        let { pointDifference, startPoint } = state;
+        let currentPoint = e.nativeEvent.clientX;
+        pointDifference = currentPoint - startPoint;
+        return { pointDifference };
+      });
+    }
+  };
+
+  handleMouseUp = (e) => {
+    this.setState((state) => {
+      let { move, pointDifference } = state;
+      move = !move;
+      if (pointDifference !== null) {
+        if (pointDifference < 0) {
+          this.handleChangeLeft();
+        } else {
+          this.handleChangeRight();
+        }
+      }
+      pointDifference = null;
+      return { move, pointDifference };
+    });
+  };
+
   render() {
     const slideIndex = this.state.arrayOfImages[this.state.currentSlide];
     return (
       <div className="carousel">
-        <div className="slider">{<CarouselElement {...slideIndex} />}</div>
+        <div
+          className="slider"
+          onMouseDown={this.handleMouseDown}
+          onMouseMove={this.handleMouseMove}
+          onMouseUp={this.handleMouseUp}
+        >
+          {<CarouselElement {...slideIndex} />}
+        </div>
 
         <div className="controls">
           <button className="arrow previos" onClick={this.handleChangeLeft}>
