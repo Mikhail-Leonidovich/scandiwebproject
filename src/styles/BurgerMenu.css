@@ -1,0 +1,30 @@
+.burger__menu {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .burger__menu {
+    display: inline-block;
+    height: 20px;
+    width: 30px;
+    position: fixed;
+    top: 10px;
+    right: 18px;
+  }
+  .burger__line {
+    position: absolute;
+    height: 4px;
+    width: 100%;
+    background-color: #de3333;
+  }
+  .burger__line.top {
+    top: 0;
+  }
+
+  .burger__line.middle {
+    top: 8px;
+  }
+  .burger__line.bottom {
+    bottom: 0;
+  }
+}

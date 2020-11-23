@@ -42,12 +42,13 @@ class Carousel extends Component {
   };
 
   handleMouseDown = (e) => {
-    this.setState((state) => {
+    /* this.setState((state) => {
       let { startPoint, move } = state;
       startPoint = e.nativeEvent.clientX;
-      move = !move;
+      move = true;
       return { startPoint, move };
-    });
+    }); */
+    console.log(e);
   };
 
   handleMouseMove = (e) => {
@@ -61,15 +62,51 @@ class Carousel extends Component {
     }
   };
 
-  handleMouseUp = (e) => {
+  handleMouseUp = () => {
     this.setState((state) => {
       let { move, pointDifference } = state;
-      move = !move;
+      move = false;
       if (pointDifference !== null) {
         if (pointDifference < 0) {
-          this.handleChangeLeft();
-        } else {
           this.handleChangeRight();
+        } else {
+          this.handleChangeLeft();
+        }
+      }
+      pointDifference = null;
+      return { move, pointDifference };
+    });
+  };
+
+  handleTouchStart = (e) => {
+    this.setState((state) => {
+      let { startPoint, move } = state;
+      startPoint = e.changedTouches[0].clientX;
+      move = true;
+      return { startPoint, move };
+    });
+  };
+
+  handleTouchMove = (e) => {
+    if (this.state.move) {
+      this.setState((state) => {
+        let { pointDifference, startPoint } = state;
+        let currentPoint = e.changedTouches[0].clientX;
+        pointDifference = currentPoint - startPoint;
+        return { pointDifference };
+      });
+    }
+  };
+
+  handleTouchEnd = () => {
+    this.setState((state) => {
+      let { move, pointDifference } = state;
+      move = false;
+      if (pointDifference !== null) {
+        if (pointDifference < 0) {
+          this.handleChangeRight();
+        } else {
+          this.handleChangeLeft();
         }
       }
       pointDifference = null;
@@ -79,6 +116,7 @@ class Carousel extends Component {
 
   render() {
     const slideIndex = this.state.arrayOfImages[this.state.currentSlide];
+
     return (
       <div className="carousel">
         <div
@@ -86,8 +124,11 @@ class Carousel extends Component {
           onMouseDown={this.handleMouseDown}
           onMouseMove={this.handleMouseMove}
           onMouseUp={this.handleMouseUp}
+          onTouchStart={this.handleTouchStart}
+          onTouchMove={this.handleTouchMove}
+          onTouchEnd={this.handleTouchEnd}
         >
-          {<CarouselElement {...slideIndex} />}
+          <CarouselElement {...slideIndex} />
         </div>
 
         <div className="controls">

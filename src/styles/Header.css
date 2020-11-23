@@ -14,10 +14,6 @@
   opacity: 1;
 }
 
-.burger-menu {
-  display: none;
-}
-
 .header__nav {
   display: flex;
   justify-content: space-between;
@@ -111,7 +107,7 @@
 
   .nav__item {
     margin: 30px 0;
-    animation: 2s navItemSurfacing;
+    animation: 2s item__surfacing;
   }
 
   .nav__item:hover {
@@ -121,42 +117,15 @@
   .nav__link {
     color: #de3333;
     font-size: 22px;
-    animation: 2s navLinkSurfacing;
+    animation: 2s link__surfacing;
   }
 
   .scandiweb-logo {
     max-height: 30px;
   }
 
-  .burger-menu {
-    display: inline-block;
-    height: 20px;
-    width: 30px;
-    position: fixed;
-    top: 10px;
-    right: 18px;
-  }
-
   .active {
     z-index: 100;
-  }
-
-  .burger-line {
-    position: absolute;
-    height: 4px;
-    width: 100%;
-    background-color: #de3333;
-  }
-
-  .burger-line.top {
-    top: 0;
-  }
-
-  .burger-line.middle {
-    top: 8px;
-  }
-  .burger-line.bottom {
-    bottom: 0;
   }
 }
 
@@ -164,15 +133,15 @@
       animation
 ===================*/
 
-.navListSurfacing {
-  animation: 1s navListSurfacing;
+.list__surfacing {
+  animation: 1.5s list__surfacing;
 }
 
-.navListSurfacingBack {
-  animation: 1s navListSurfacingBack;
+.list__surfacing__back {
+  animation: 1.5s list__surfacing__back;
 }
 
-@keyframes navListSurfacing {
+@keyframes list__surfacing {
   from {
     height: 10vh;
     width: 10%;
@@ -194,7 +163,7 @@
   }
 }
 
-@keyframes navListSurfacingBack {
+@keyframes list__surfacing__back {
   from {
     height: 100vh;
     width: 100%;
@@ -221,7 +190,7 @@
   }
 }
 
-@keyframes navItemSurfacing {
+@keyframes item__surfacing {
   from {
     opacity: 0;
   }
@@ -230,7 +199,7 @@
   }
 }
 
-@keyframes navLinkSurfacing {
+@keyframes link__surfacing {
   from {
     font-size: 10px;
     visibility: hidden;
