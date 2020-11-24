@@ -49,19 +49,35 @@ class Carousel extends Component {
   ==================== */
 
   handleGestureOn = (e) => {
-    this.setState((state) => {
-      let { startPoint, move } = state;
-      startPoint = e.nativeEvent.clientX;
-      move = true;
-      return { startPoint, move };
-    });
+    if (e.type === "mousedown") {
+      this.setState((state) => {
+        let { startPoint, move } = state;
+        startPoint = e.nativeEvent.clientX;
+        move = true;
+        return { startPoint, move };
+      });
+    } else if (e.type === "touchstart") {
+      this.setState((state) => {
+        let { startPoint, move } = state;
+        startPoint = e.changedTouches[0].clientX;
+        move = true;
+        return { startPoint, move };
+      });
+    }
   };
 
   handleGestureMove = (e) => {
-    if (this.state.move) {
+    if (this.state.move && e.type === "mousemove") {
       this.setState((state) => {
         let { pointDifference, startPoint } = state;
         let currentPoint = e.nativeEvent.clientX;
+        pointDifference = currentPoint - startPoint;
+        return { pointDifference };
+      });
+    } else if (this.state.move && e.type === "touchmove") {
+      this.setState((state) => {
+        let { pointDifference, startPoint } = state;
+        let currentPoint = e.changedTouches[0].clientX;
         pointDifference = currentPoint - startPoint;
         return { pointDifference };
       });
@@ -88,7 +104,6 @@ class Carousel extends Component {
   render() {
     const slideIndex = this.state.arrayOfImages[this.state.currentSlide];
     const animationDirection = this.state.animationDirection;
-    const arrayOfImages = this.state.arrayOfImages;
     const currentSlide = this.state.currentSlide;
 
     const funcCheckImageClass = (props) => {
@@ -111,23 +126,21 @@ class Carousel extends Component {
           onTouchMove={this.handleGestureMove}
           onTouchEnd={this.handleGestureOff}
         >
-          {arrayOfImages.map((elem, index) => {
-            if (index === currentSlide) {
-              return (elem = (
-                <CarouselElement
-                  key={currentSlide}
-                  url={slideIndex.url}
-                  blockClass={slideIndex.blockClass}
-                  imageClass={
-                    animationDirection
-                      ? funcCheckImageClass("moveLeft")
-                      : funcCheckImageClass("moveRight")
-                  }
-                  alt={slideIndex.alt}
-                />
-              ));
-            }
-          })}
+          {
+            (slideIndex[currentSlide] = (
+              <CarouselElement
+                key={currentSlide}
+                url={slideIndex.url}
+                blockClass={slideIndex.blockClass}
+                imageClass={
+                  animationDirection
+                    ? funcCheckImageClass("moveLeft")
+                    : funcCheckImageClass("moveRight")
+                }
+                alt={slideIndex.alt}
+              />
+            ))
+          }
         </div>
 
         <div className="controls">
