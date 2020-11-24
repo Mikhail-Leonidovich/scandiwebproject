@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import allImages from "../components/AllImages.json";
-import CarouselElement from "../components/CarouselElement.js";
+import allImages from "./AllImages.json";
+import CarouselElement from "./CarouselElement.js";
 import "../styles/Carousel.css";
 
 class Carousel extends Component {
@@ -14,44 +14,50 @@ class Carousel extends Component {
       move: false,
       arrayOfImages: allImages,
       currentSlide: 0,
+      animationDirection: false,
     };
   }
 
+  /* ==================== 
+    Navigation buttons
+  ==================== */
+
   handleChangeLeft = () => {
     this.setState((state) => {
-      let { currentSlide } = state;
-      if (currentSlide > 0) {
-        currentSlide = currentSlide - 1;
-      } else {
-        currentSlide = state.arrayOfImages.length - 1;
-      }
-      return { currentSlide };
+      let { currentSlide, animationDirection } = state;
+      animationDirection = true;
+      currentSlide =
+        currentSlide > 0 ? currentSlide - 1 : state.arrayOfImages.length - 1;
+      return { currentSlide, animationDirection };
     });
   };
 
   handleChangeRight = () => {
     this.setState((state) => {
-      let { currentSlide } = state;
-      if (currentSlide === state.arrayOfImages.length - 1) {
-        currentSlide = 0;
-      } else {
-        currentSlide = currentSlide + 1;
-      }
-      return { currentSlide };
+      let { currentSlide, animationDirection } = state;
+      animationDirection = false;
+      currentSlide =
+        currentSlide === state.arrayOfImages.length - 1
+          ? (currentSlide = 0)
+          : (currentSlide = currentSlide + 1);
+      return { currentSlide, animationDirection };
     });
   };
 
-  handleMouseDown = (e) => {
-    /* this.setState((state) => {
+  /* ==================== 
+      Gesture events
+  ==================== */
+
+  handleGestureOn = (e) => {
+    this.setState((state) => {
       let { startPoint, move } = state;
       startPoint = e.nativeEvent.clientX;
       move = true;
       return { startPoint, move };
-    }); */
-    console.log(e);
+    });
   };
 
-  handleMouseMove = (e) => {
+  handleGestureMove = (e) => {
     if (this.state.move) {
       this.setState((state) => {
         let { pointDifference, startPoint } = state;
@@ -62,46 +68,11 @@ class Carousel extends Component {
     }
   };
 
-  handleMouseUp = () => {
+  handleGestureOff = () => {
     this.setState((state) => {
       let { move, pointDifference } = state;
       move = false;
-      if (pointDifference !== null) {
-        if (pointDifference < 0) {
-          this.handleChangeRight();
-        } else {
-          this.handleChangeLeft();
-        }
-      }
-      pointDifference = null;
-      return { move, pointDifference };
-    });
-  };
 
-  handleTouchStart = (e) => {
-    this.setState((state) => {
-      let { startPoint, move } = state;
-      startPoint = e.changedTouches[0].clientX;
-      move = true;
-      return { startPoint, move };
-    });
-  };
-
-  handleTouchMove = (e) => {
-    if (this.state.move) {
-      this.setState((state) => {
-        let { pointDifference, startPoint } = state;
-        let currentPoint = e.changedTouches[0].clientX;
-        pointDifference = currentPoint - startPoint;
-        return { pointDifference };
-      });
-    }
-  };
-
-  handleTouchEnd = () => {
-    this.setState((state) => {
-      let { move, pointDifference } = state;
-      move = false;
       if (pointDifference !== null) {
         if (pointDifference < 0) {
           this.handleChangeRight();
@@ -116,19 +87,47 @@ class Carousel extends Component {
 
   render() {
     const slideIndex = this.state.arrayOfImages[this.state.currentSlide];
+    const animationDirection = this.state.animationDirection;
+    const arrayOfImages = this.state.arrayOfImages;
+    const currentSlide = this.state.currentSlide;
+
+    const funcCheckImageClass = (props) => {
+      if (props === "moveLeft") {
+        return slideIndex.imageClass + " img__swipe-right";
+      }
+      if (props === "moveRight") {
+        return slideIndex.imageClass + " img__swipe-left";
+      }
+    };
 
     return (
       <div className="carousel">
         <div
           className="slider"
-          onMouseDown={this.handleMouseDown}
-          onMouseMove={this.handleMouseMove}
-          onMouseUp={this.handleMouseUp}
-          onTouchStart={this.handleTouchStart}
-          onTouchMove={this.handleTouchMove}
-          onTouchEnd={this.handleTouchEnd}
+          onMouseDown={this.handleGestureOn}
+          onMouseMove={this.handleGestureMove}
+          onMouseUp={this.handleGestureOff}
+          onTouchStart={this.handleGestureOn}
+          onTouchMove={this.handleGestureMove}
+          onTouchEnd={this.handleGestureOff}
         >
-          <CarouselElement {...slideIndex} />
+          {arrayOfImages.map((elem, index) => {
+            if (index === currentSlide) {
+              return (elem = (
+                <CarouselElement
+                  key={currentSlide}
+                  url={slideIndex.url}
+                  blockClass={slideIndex.blockClass}
+                  imageClass={
+                    animationDirection
+                      ? funcCheckImageClass("moveLeft")
+                      : funcCheckImageClass("moveRight")
+                  }
+                  alt={slideIndex.alt}
+                />
+              ));
+            }
+          })}
         </div>
 
         <div className="controls">

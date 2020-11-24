@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../styles/Header.css";
 import "../styles/BurgerMenu.css";
-import BurgerMenu from "../components/BurgerMenu.js";
+import BurgerMenu from "./BurgerMenu.js";
 import scandiwebLogo from "../images/scandiweb_logo.png";
 
 class Header extends Component {

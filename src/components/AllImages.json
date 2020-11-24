@@ -8,19 +8,19 @@
   {
     "url": "./images/imageOcean.jpg",
     "imageClass": "slider__img",
-    "blockClass": "slider__elem",
+    "blockClass": "slider__elem ",
     "alt": "ocean"
   },
   {
     "url": "./images/imageShips.jpg",
     "imageClass": "slider__img",
-    "blockClass": "slider__elem",
+    "blockClass": "slider__elem ",
     "alt": "ships"
   },
   {
     "url": "./images/imageTiger.jpg",
     "imageClass": "slider__img",
-    "blockClass": "slider__elem",
+    "blockClass": "slider__elem ",
     "alt": "tiger"
   }
 ]
