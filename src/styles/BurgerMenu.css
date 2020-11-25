@@ -2,6 +2,10 @@
   display: none;
 }
 
+/* ==================
+      adaptive
+===================*/
+
 @media screen and (max-width: 768px) {
   .burger__menu {
     display: inline-block;

@@ -107,7 +107,6 @@
 
   .nav__item {
     margin: 30px 0;
-    animation: 2s item__surfacing;
   }
 
   .nav__item:hover {
@@ -117,7 +116,6 @@
   .nav__link {
     color: #de3333;
     font-size: 22px;
-    animation: 2s link__surfacing;
   }
 
   .scandiweb-logo {
@@ -137,8 +135,8 @@
   animation: 1.5s list__surfacing;
 }
 
-.list__surfacing__back {
-  animation: 1.5s list__surfacing__back;
+.list__surfacing-back {
+  animation: 1.5s list__surfacing-back;
 }
 
 @keyframes list__surfacing {
@@ -155,7 +153,7 @@
     top: 0;
   }
   30% {
-    border-bottom-left-radius: 100% 70%;
+    border-bottom-left-radius: 100% 90%;
   }
 
   100% {
@@ -163,7 +161,7 @@
   }
 }
 
-@keyframes list__surfacing__back {
+@keyframes list__surfacing-back {
   from {
     height: 100vh;
     width: 100%;
@@ -186,26 +184,6 @@
   }
 
   100% {
-    border-bottom-left-radius: 100% 60%;
-  }
-}
-
-@keyframes item__surfacing {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes link__surfacing {
-  from {
-    font-size: 10px;
-    visibility: hidden;
-  }
-  50% {
-    font-size: 22px;
-    visibility: visible;
+    border-bottom-left-radius: 30% 80%;
   }
 }

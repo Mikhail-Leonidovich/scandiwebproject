@@ -4,6 +4,7 @@
   user-select: none;
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .slider__img {
@@ -21,6 +22,10 @@
 .img__swipe-right {
   animation: 1.5s img__swipe-right;
 }
+
+/* ==================
+      animation
+===================*/
 
 @keyframes img__swipe-left {
   from {

@@ -46,7 +46,7 @@ class Header extends Component {
               className={
                 this.state.visible
                   ? "nav__list show list__surfacing"
-                  : "nav__list list__surfacing__back"
+                  : "nav__list list__surfacing-back"
               }
             >
               <li className="nav__item">

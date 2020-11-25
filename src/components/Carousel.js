@@ -15,6 +15,7 @@ class Carousel extends Component {
       arrayOfImages: allImages,
       currentSlide: 0,
       animationDirection: false,
+      resolution: false,
     };
   }
 
@@ -72,6 +73,10 @@ class Carousel extends Component {
         let { pointDifference, startPoint } = state;
         let currentPoint = e.nativeEvent.clientX;
         pointDifference = currentPoint - startPoint;
+
+        let currentSliderElem = e.target.querySelector(".slider__elem");
+        currentSliderElem.style.left = `${pointDifference}px`;
+
         return { pointDifference };
       });
     } else if (this.state.move && e.type === "touchmove") {
@@ -79,6 +84,10 @@ class Carousel extends Component {
         let { pointDifference, startPoint } = state;
         let currentPoint = e.changedTouches[0].clientX;
         pointDifference = currentPoint - startPoint;
+
+        let currentSliderElem = e.target.querySelector(".slider__elem");
+        currentSliderElem.style.left = `${pointDifference}px`;
+
         return { pointDifference };
       });
     }
@@ -96,9 +105,38 @@ class Carousel extends Component {
           this.handleChangeLeft();
         }
       }
+
       pointDifference = null;
       return { move, pointDifference };
     });
+  };
+
+  /* ==================== 
+   checking cursor hover
+  ==================== */
+
+  handleCheckOver = (e) => {
+    if (e.target.className === "slider") {
+      this.setState((state) => {
+        let { resolution } = state;
+        resolution = true;
+        return { resolution };
+      });
+    }
+  };
+
+  handleCheckOut = (e) => {
+    if (
+      e.relatedTarget.className !== "slider" ||
+      e.relatedTarget.className === null
+    ) {
+      this.setState((state) => {
+        let { resolution } = state;
+        resolution = false;
+        return { resolution };
+      });
+    }
+    this.handleGestureOff();
   };
 
   render() {
@@ -125,6 +163,8 @@ class Carousel extends Component {
           onTouchStart={this.handleGestureOn}
           onTouchMove={this.handleGestureMove}
           onTouchEnd={this.handleGestureOff}
+          onMouseOver={this.handleCheckOver}
+          onMouseOut={this.handleCheckOut}
         >
           {
             (slideIndex[currentSlide] = (
