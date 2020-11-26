@@ -50,54 +50,40 @@ class Carousel extends Component {
   ==================== */
 
   handleGestureOn = (e) => {
-    if (e.type === "mousedown") {
-      this.setState((state) => {
-        let { startPoint, move } = state;
+    this.setState((state) => {
+      let { startPoint, move } = state;
+      if (e.type === "mousedown") {
         startPoint = e.nativeEvent.clientX;
-        move = true;
-        return { startPoint, move };
-      });
-    } else if (e.type === "touchstart") {
-      this.setState((state) => {
-        let { startPoint, move } = state;
+      }
+      if (e.type === "touchstart") {
         startPoint = e.changedTouches[0].clientX;
-        move = true;
-        return { startPoint, move };
-      });
-    }
+      }
+      move = true;
+      return { startPoint, move };
+    });
   };
 
   handleGestureMove = (e) => {
-    if (this.state.move && e.type === "mousemove") {
-      this.setState((state) => {
-        let { pointDifference, startPoint } = state;
-        let currentPoint = e.nativeEvent.clientX;
-        pointDifference = currentPoint - startPoint;
-
-        let currentSliderElem = e.target.querySelector(".slider__elem");
-        currentSliderElem.style.left = `${pointDifference}px`;
-
-        return { pointDifference };
-      });
-    } else if (this.state.move && e.type === "touchmove") {
-      this.setState((state) => {
-        let { pointDifference, startPoint } = state;
-        let currentPoint = e.changedTouches[0].clientX;
-        pointDifference = currentPoint - startPoint;
-
-        let currentSliderElem = e.target.querySelector(".slider__elem");
-        currentSliderElem.style.left = `${pointDifference}px`;
-
-        return { pointDifference };
-      });
-    }
+    let currentSliderElem = e.target.querySelector(".slider__elem");
+    let currentPoint = null;
+    this.setState((state) => {
+      let { pointDifference, startPoint } = state;
+      if (this.state.move && e.type === "mousemove") {
+        currentPoint = e.nativeEvent.clientX;
+      }
+      if (this.state.move && e.type === "touchmove") {
+        currentPoint = e.changedTouches[0].clientX;
+      }
+      pointDifference = currentPoint - startPoint;
+      currentSliderElem.style.left = `${pointDifference}px`;
+      return { pointDifference };
+    });
   };
 
   handleGestureOff = () => {
     this.setState((state) => {
       let { move, pointDifference } = state;
       move = false;
-
       if (pointDifference !== null) {
         if (pointDifference < 0) {
           this.handleChangeRight();
@@ -105,7 +91,6 @@ class Carousel extends Component {
           this.handleChangeLeft();
         }
       }
-
       pointDifference = null;
       return { move, pointDifference };
     });
@@ -126,10 +111,7 @@ class Carousel extends Component {
   };
 
   handleCheckOut = (e) => {
-    if (
-      e.relatedTarget.className !== "slider" ||
-      e.relatedTarget.className === null
-    ) {
+    if (e.target.className === "slider") {
       this.setState((state) => {
         let { resolution } = state;
         resolution = false;
