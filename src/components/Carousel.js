@@ -70,11 +70,13 @@ class Carousel extends Component {
       let { pointDifference, startPoint } = state;
       if (this.state.move && e.type === "mousemove") {
         currentPoint = e.nativeEvent.clientX;
+        pointDifference = currentPoint - startPoint;
       }
       if (this.state.move && e.type === "touchmove") {
         currentPoint = e.changedTouches[0].clientX;
+        pointDifference = currentPoint - startPoint;
       }
-      pointDifference = currentPoint - startPoint;
+
       currentSliderElem.style.left = `${pointDifference}px`;
       return { pointDifference };
     });
@@ -100,25 +102,10 @@ class Carousel extends Component {
    checking cursor hover
   ==================== */
 
-  handleCheckOver = (e) => {
-    if (e.target.className === "slider") {
-      this.setState((state) => {
-        let { resolution } = state;
-        resolution = true;
-        return { resolution };
-      });
-    }
-  };
-
   handleCheckOut = (e) => {
     if (e.target.className === "slider") {
-      this.setState((state) => {
-        let { resolution } = state;
-        resolution = false;
-        return { resolution };
-      });
+      this.handleGestureOff();
     }
-    this.handleGestureOff();
   };
 
   render() {
@@ -145,7 +132,7 @@ class Carousel extends Component {
           onTouchStart={this.handleGestureOn}
           onTouchMove={this.handleGestureMove}
           onTouchEnd={this.handleGestureOff}
-          onMouseOver={this.handleCheckOver}
+          
           onMouseOut={this.handleCheckOut}
         >
           {
