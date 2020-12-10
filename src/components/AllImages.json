@@ -1,22 +1,41 @@
 [
   {
+    "tagEl": "img",
+    "classEl": "slider__inner__img",
     "url": "./images/imageForest.jpg",
-    "alt": "forest",
-    "text": "Lorem "
+    "alt": "forest"
   },
   {
+    "tagEl": "div",
+    "classEl": "slider__inner__txt",
+    "text": "By the early 1990's, people were using computers in many different ways. Computers were already installed in most schools, offices, and homes. They were commonly used for writing papers, playing games, financial accounting, and business productivity applications. But very few people used them for communication, research, and shopping the way we do now. A man named Tim Berners-Lee changed all that. In 1990, Lee added an exciting hypertext and multimedia layer to the Internet and called it the World Wide Web. The rest, as they say, is history."
+  },
+  {
+    "tagEl": "img",
+    "classEl": "slider__inner__img",
     "url": "./images/imageOcean.jpg",
-    "alt": "ocean",
-    "text": "222"
+    "alt": "ocean"
   },
   {
+    "tagEl": "div",
+    "classEl": "slider__inner__txt",
+    "text": "By the early 1990's, people were using computers in many different ways. Computers were already installed in most schools, offices, and homes. They were commonly used for writing papers, playing games, financial accounting, and business productivity applications. But very few people used them for communication, research, and shopping the way we do now. A man named Tim Berners-Lee changed all that. In 1990, Lee added an exciting hypertext and multimedia layer to the Internet and called it the World Wide Web. The rest, as they say, is history."
+  },
+  {
+    "tagEl": "img",
+    "classEl": "slider__inner__img",
     "url": "./images/imageShips.jpg",
-    "alt": "ships",
-    "text": "333"
+    "alt": "ships"
   },
   {
+    "tagEl": "div",
+    "classEl": "slider__inner__txt",
+    "text": "By the early 1990's, people were using computers in many different ways. Computers were already installed in most schools, offices, and homes. They were commonly used for writing papers, playing games, financial accounting, and business productivity applications. But very few people used them for communication, research, and shopping the way we do now. A man named Tim Berners-Lee changed all that. In 1990, Lee added an exciting hypertext and multimedia layer to the Internet and called it the World Wide Web. The rest, as they say, is history."
+  },
+  {
+    "tagEl": "img",
+    "classEl": "slider__inner__img",
     "url": "./images/imageTiger.jpg",
-    "alt": "tiger",
-    "text": "444"
+    "alt": "tiger"
   }
 ]

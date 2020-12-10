@@ -81,6 +81,7 @@ class Carousel extends Component {
   };
 
   handleGestureOff = () => {
+    let currentSliderElem = document.querySelector(".slider__elem");
     this.setState((state) => {
       let { move, pointDifference } = state;
       move = false;
@@ -94,6 +95,7 @@ class Carousel extends Component {
       pointDifference = null;
       return { move, pointDifference };
     });
+    currentSliderElem.style.left = "0";
   };
 
   /* ==================== 
@@ -110,23 +112,42 @@ class Carousel extends Component {
 
   handleCheckElemClass = (props) => {
     let elemClass = null;
+    const slideIndex = this.state.arrayOfImages[this.state.currentSlide];
     if (props) {
-      elemClass = "slider__inner inner__swipe-left";
+      elemClass = `${slideIndex.classEl} inner__swipe-left`;
     } else {
-      elemClass = "slider__inner inner__swipe-right";
+      elemClass = `${slideIndex.classEl} inner__swipe-right`;
     }
     return elemClass;
   };
 
+
+
   render() {
-    const slideIndex = this.state.arrayOfImages[this.state.currentSlide];
-    const animationDirection = this.state.animationDirection;
-    const currentSlide = this.state.currentSlide;
+
+    const BuildSliderInner = () => {
+      const slideIndex = this.state.arrayOfImages[this.state.currentSlide];
+      const animationDirection = this.state.animationDirection;
+      /* can create any architecture */
+      if (slideIndex.tagEl === "div") {
+        return (
+          <div className={this.handleCheckElemClass(animationDirection)} >
+            <div className="inner__text">{slideIndex.text}</div>
+          </div>
+        )
+      }
+      if (slideIndex.tagEl === "img") {
+        return (
+          <img className={this.handleCheckElemClass(animationDirection)} src={slideIndex.url} alt={slideIndex.alt} />
+        )
+      }
+
+    }
 
     const sliderInner = () => {
       return (
-        <div className={this.handleCheckElemClass(animationDirection)} key={currentSlide}>
-
+        <div className="slider__elem" >
+          {BuildSliderInner()}
         </div>
       )
     }
@@ -143,11 +164,7 @@ class Carousel extends Component {
           onTouchEnd={this.handleGestureOff}
           onMouseOut={this.handleCheckOut}
         >
-          <div className="slider__elem" >
-
-            {sliderInner()}
-
-          </div>
+          {sliderInner()}
         </div>
 
         <div className="controls">
