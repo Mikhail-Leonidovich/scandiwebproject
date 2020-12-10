@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import allImages from "./AllImages.json";
-import CarouselElement from "./CarouselElement.js";
 import "../styles/Carousel.css";
 
 class Carousel extends Component {
@@ -15,7 +14,6 @@ class Carousel extends Component {
       arrayOfImages: allImages,
       currentSlide: 0,
       animationDirection: false,
-      resolution: false,
     };
   }
 
@@ -64,7 +62,7 @@ class Carousel extends Component {
   };
 
   handleGestureMove = (e) => {
-    let currentSliderElem = e.target.querySelector(".slider__elem");
+    let currentSliderElem = document.querySelector(".slider__elem");
     let currentPoint = null;
     this.setState((state) => {
       let { pointDifference, startPoint } = state;
@@ -76,10 +74,10 @@ class Carousel extends Component {
         currentPoint = e.changedTouches[0].clientX;
         pointDifference = currentPoint - startPoint;
       }
-
       currentSliderElem.style.left = `${pointDifference}px`;
       return { pointDifference };
     });
+    currentSliderElem.style.left = "0";
   };
 
   handleGestureOff = () => {
@@ -103,9 +101,21 @@ class Carousel extends Component {
   ==================== */
 
   handleCheckOut = (e) => {
-    if (e.target.className === "slider") {
+    let currentSliderElem = document.querySelector(".slider__elem");
+    if (e.target.className === "slider" && this.state.move) {
+      currentSliderElem.style.left = "0";
       this.handleGestureOff();
     }
+  };
+
+  handleCheckElemClass = (props) => {
+    let elemClass = null;
+    if (props) {
+      elemClass = "slider__inner inner__swipe-left";
+    } else {
+      elemClass = "slider__inner inner__swipe-right";
+    }
+    return elemClass;
   };
 
   render() {
@@ -113,14 +123,13 @@ class Carousel extends Component {
     const animationDirection = this.state.animationDirection;
     const currentSlide = this.state.currentSlide;
 
-    const funcCheckImageClass = (props) => {
-      if (props === "moveLeft") {
-        return slideIndex.imageClass + " img__swipe-right";
-      }
-      if (props === "moveRight") {
-        return slideIndex.imageClass + " img__swipe-left";
-      }
-    };
+    const sliderInner = () => {
+      return (
+        <div className={this.handleCheckElemClass(animationDirection)} key={currentSlide}>
+
+        </div>
+      )
+    }
 
     return (
       <div className="carousel">
@@ -132,24 +141,13 @@ class Carousel extends Component {
           onTouchStart={this.handleGestureOn}
           onTouchMove={this.handleGestureMove}
           onTouchEnd={this.handleGestureOff}
-          
           onMouseOut={this.handleCheckOut}
         >
-          {
-            (slideIndex[currentSlide] = (
-              <CarouselElement
-                key={currentSlide}
-                url={slideIndex.url}
-                blockClass={slideIndex.blockClass}
-                imageClass={
-                  animationDirection
-                    ? funcCheckImageClass("moveLeft")
-                    : funcCheckImageClass("moveRight")
-                }
-                alt={slideIndex.alt}
-              />
-            ))
-          }
+          <div className="slider__elem" >
+
+            {sliderInner()}
+
+          </div>
         </div>
 
         <div className="controls">
@@ -160,7 +158,7 @@ class Carousel extends Component {
             <div className="right"></div>
           </button>
         </div>
-      </div>
+      </div >
     );
   }
 }

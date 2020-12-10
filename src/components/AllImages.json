@@ -1,26 +1,22 @@
 [
   {
     "url": "./images/imageForest.jpg",
-    "imageClass": "slider__img",
-    "blockClass": "slider__elem",
-    "alt": "forest"
+    "alt": "forest",
+    "text": "Lorem "
   },
   {
     "url": "./images/imageOcean.jpg",
-    "imageClass": "slider__img",
-    "blockClass": "slider__elem ",
-    "alt": "ocean"
+    "alt": "ocean",
+    "text": "222"
   },
   {
     "url": "./images/imageShips.jpg",
-    "imageClass": "slider__img",
-    "blockClass": "slider__elem ",
-    "alt": "ships"
+    "alt": "ships",
+    "text": "333"
   },
   {
     "url": "./images/imageTiger.jpg",
-    "imageClass": "slider__img",
-    "blockClass": "slider__elem ",
-    "alt": "tiger"
+    "alt": "tiger",
+    "text": "444"
   }
 ]
