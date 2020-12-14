@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import allImages from "./AllImages.json";
+import React, { Component, useState } from "react";
+import allItems from "./AllItems.json";
 import "../styles/Carousel.css";
 
 class Carousel extends Component {
@@ -11,9 +11,9 @@ class Carousel extends Component {
       startPoint: null,
       endPoint: null,
       move: false,
-      arrayOfImages: allImages,
+      arrayOfItems: allItems,
       currentSlide: 0,
-      animationDirection: false,
+      sliderPosition: 0,
     };
   }
 
@@ -21,25 +21,21 @@ class Carousel extends Component {
     Navigation buttons
   ==================== */
 
-  handleChangeLeft = () => {
+  handleMoveLeft = () => {
     this.setState((state) => {
-      let { currentSlide, animationDirection } = state;
-      animationDirection = true;
-      currentSlide =
-        currentSlide > 0 ? currentSlide - 1 : state.arrayOfImages.length - 1;
-      return { currentSlide, animationDirection };
+      let { sliderPosition, arrayOfItems } = state;
+      sliderPosition >= 0 ? sliderPosition = -((arrayOfItems.length - 1) * 100) : sliderPosition = sliderPosition + 100;
+      return { sliderPosition };
     });
   };
 
-  handleChangeRight = () => {
+  handleMoveRight = () => {
     this.setState((state) => {
-      let { currentSlide, animationDirection } = state;
-      animationDirection = false;
-      currentSlide =
-        currentSlide === state.arrayOfImages.length - 1
-          ? (currentSlide = 0)
-          : (currentSlide = currentSlide + 1);
-      return { currentSlide, animationDirection };
+      let { sliderPosition, arrayOfItems } = state;
+      sliderPosition > -(arrayOfItems.length - 1) * 100 ? sliderPosition = sliderPosition - 100 :
+        sliderPosition = 0;
+
+      return { sliderPosition };
     });
   };
 
@@ -47,7 +43,7 @@ class Carousel extends Component {
       Gesture events
   ==================== */
 
-  handleGestureOn = (e) => {
+  /* handleGestureOn = (e) => {
     this.setState((state) => {
       let { startPoint, move } = state;
       if (e.type === "mousedown") {
@@ -96,82 +92,54 @@ class Carousel extends Component {
       return { move, pointDifference };
     });
     currentSliderElem.style.left = "0";
-  };
+  }; */
 
   /* ==================== 
    checking cursor hover
   ==================== */
 
-  handleCheckOut = (e) => {
+  /* handleCheckOut = (e) => {
     let currentSliderElem = document.querySelector(".slider__elem");
     if (e.target.className === "slider" && this.state.move) {
       currentSliderElem.style.left = "0";
       this.handleGestureOff();
     }
   };
-
-  handleCheckElemClass = (props) => {
-    let elemClass = null;
-    const slideIndex = this.state.arrayOfImages[this.state.currentSlide];
-    if (props) {
-      elemClass = `${slideIndex.classEl} inner__swipe-left`;
-    } else {
-      elemClass = `${slideIndex.classEl} inner__swipe-right`;
-    }
-    return elemClass;
-  };
-
+ */
 
 
   render() {
+    const sliderPosition = this.state.sliderPosition;
 
-    const BuildSliderInner = () => {
-      const slideIndex = this.state.arrayOfImages[this.state.currentSlide];
-      const animationDirection = this.state.animationDirection;
-      /* can create any architecture */
+    const BuildSliderInner = (index) => {
+      const slideIndex = this.state.arrayOfItems[index];
       if (slideIndex.tagEl === "div") {
         return (
-          <div className={this.handleCheckElemClass(animationDirection)} >
+          <div className="slider__inner__txt" >
             <div className="inner__text">{slideIndex.text}</div>
           </div>
         )
       }
       if (slideIndex.tagEl === "img") {
         return (
-          <img className={this.handleCheckElemClass(animationDirection)} src={slideIndex.url} alt={slideIndex.alt} />
+          <img className="slider__inner__img" src={slideIndex.url} alt={slideIndex.alt} />
         )
       }
-
-    }
-
-    const sliderInner = () => {
-      return (
-        <div className="slider__elem" >
-          {BuildSliderInner()}
-        </div>
-      )
     }
 
     return (
-      <div className="carousel">
-        <div
-          className="slider"
-          onMouseDown={this.handleGestureOn}
-          onMouseMove={this.handleGestureMove}
-          onMouseUp={this.handleGestureOff}
-          onTouchStart={this.handleGestureOn}
-          onTouchMove={this.handleGestureMove}
-          onTouchEnd={this.handleGestureOff}
-          onMouseOut={this.handleCheckOut}
-        >
-          {sliderInner()}
-        </div>
+      <div className="carousel" >
+
+        {this.state.arrayOfItems.map((item, index) => {
+          return (item = (< div key={index} className="slider__elem" style={{ transform: `translateX(${sliderPosition}%)` }}>{BuildSliderInner(index)}</div>));
+        })}
+
 
         <div className="controls">
-          <button className="arrow previos" onClick={this.handleChangeLeft}>
+          <button className="arrow previos" onClick={this.handleMoveLeft}>
             <div className="left"></div>
           </button>
-          <button className="arrow next" onClick={this.handleChangeRight}>
+          <button className="arrow next" onClick={this.handleMoveRight}>
             <div className="right"></div>
           </button>
         </div>

@@ -1,24 +1,19 @@
 .carousel {
+  margin: 0 auto;
+  margin-top: -70px;
   width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: 2;
-  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
   overflow: hidden;
 }
 
-.slider {
-  height: 100%;
-  width: 100%;
-  position: relative;
-}
-
 .slider__elem {
-  width: 100%;
+  min-width: 100%;
   height: 100%;
-  z-index: 1;
-  position: absolute;
   pointer-events: none;
+  transition: 0.5s;
+  position: relative;
 }
 
 .slider__inner__img {
@@ -31,30 +26,21 @@
 
 .slider__inner__txt {
   width: 100%;
-  height: 100%;
-
+  height: 100vh;
   background-color: yellow;
   pointer-events: none;
   -webkit-user-select: none;
   user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .inner__text {
   text-align: center;
-  margin: 0 auto;
   width: 60%;
-  display: block;
-  padding-top: 200px;
   word-wrap: break-word;
   font-family: "Lato", sans-serif;
   font-weight: 800;
-}
-
-.inner__swipe-left {
-  animation: 1.5s inner__swipe-left;
-}
-
-.inner__swipe-right {
-  animation: 1.5s inner__swipe-right;
 }
 
 /* =================
@@ -65,11 +51,9 @@
   text-align: center;
   position: absolute;
   color: blue;
-  z-index: 10;
-  height: 100%;
+  height: 100vh;
   width: 20%;
   top: 0;
-  margin-top: 70px;
   background: none;
   border: none;
   outline: none;
@@ -81,12 +65,10 @@
 
 .previos {
   left: 0;
-  z-index: 20;
 }
 
 .next {
   right: 0;
-  z-index: 20;
 }
 
 .arrow:hover {
@@ -138,14 +120,6 @@
 ===================*/
 
 @media screen and (max-width: 1189px) {
-  .arrow {
-    margin-top: 50px;
-  }
-
-  .slider__inner__img,
-  .slider__inner__txt {
-  }
-
   .left {
     width: 40px;
     height: 40px;
@@ -178,33 +152,5 @@
 @media screen and (max-width: 768px) {
   .arrow {
     display: none;
-  }
-}
-
-/* ==================
-      animation
-===================*/
-
-@keyframes inner__swipe-left {
-  from {
-    margin-left: -100%;
-    width: 100%;
-  }
-
-  to {
-    margin-left: 0;
-    width: 100%;
-  }
-}
-
-@keyframes inner__swipe-right {
-  from {
-    margin-left: 100%;
-    width: 100%;
-  }
-
-  to {
-    margin-left: 0;
-    width: 100%;
   }
 }
